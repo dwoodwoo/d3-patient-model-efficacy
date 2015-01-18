@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+circle {
+  stroke: #000;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+
+var width = 960,
+    height = 500,
+    nodes = 
+			[{"x":45,"y":0.86,"r":10},
+			{"x":55,"y":0.58,"r":10},
+			{"x":10,"y":0.99,"r":10},
+			{"x":23,"y":0.45,"r":10},
+			{"x":82,"y":0.38,"r":10},
+			{"x":35,"y":0.57,"r":10},
+			{"x":66,"y":0.85,"r":10},
+			{"x":60,"y":0.64,"r":10},
+			{"x":26,"y":0.69,"r":10},
+			{"x":74,"y":0.49,"r":10},
+			{"x":37,"y":0.27,"r":10},
+			{"x":60,"y":0.11,"r":10},
+			{"x":9,"y":1.00,"r":10},
+			{"x":48,"y":0.81,"r":10},
+			{"x":80,"y":0.55,"r":10},
+			{"x":53,"y":0.91,"r":10},
+			{"x":22,"y":0.49,"r":10},
+			{"x":81,"y":0.79,"r":10},
+			{"x":98,"y":0.19,"r":10},
+			{"x":53,"y":0.50,"r":10},
+			{"x":92,"y":0.63,"r":10},
+			{"x":17,"y":0.67,"r":10},
+			{"x":63,"y":0.03,"r":10},
+			{"x":89,"y":0.39,"r":10},
+			{"x":56,"y":0.09,"r":10},
+			{"x":52,"y":0.08,"r":10},
+			{"x":90,"y":0.30,"r":10},
+			{"x":78,"y":0.05,"r":10}];
+
+
+var div = d3.select("body").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);
+    
+ var xAxisScale = d3.scale.linear()
+    .domain([0, 100])
+    .range([0, width]);
+
+ var yAxisScale = d3.scale.linear()
+    .domain([0, 1])
+    .range([height, 0]);
+
+
+var xAxis = d3.svg.axis()
+    .scale(xAxisScale);
+
+var yAxis = d3.svg.axis()
+		.orient("right")
+    .scale(yAxisScale);
+
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var xAxisGroup = svg.append("g")
+		.attr("class", "axis")
+    .call(xAxis);
+
+var yAxisGroup = svg.append("g")
+		.attr("class", "axis")
+    .call(yAxis);
+
+var circle = svg.append("g")
+		.selectAll("circle")
+    .data(nodes)
+  .enter().append("circle")
+    .attr("cx", function(d) { return xAxisScale(d.x) ; })
+    .attr("cy", function(d) { return yAxisScale(d.y) ; })
+    .attr("r", function(d) { return d.r; })
+    .style("fill", "steelblue")
+    .on("mouseover", function(d) {      
+        div.transition()        
+            .duration(200)      
+            .style("opacity", .9);      
+        div .html(d.x + ", "  + d.y)  
+            .style("left", (d3.event.pageX) + "px")     
+            .style("top", (d3.event.pageY - 28) + "px");    
+        })                  
+    .on("mouseout", function(d) {       
+        div.transition()        
+            .duration(500)      
+            .style("opacity", 0);   
+    });
+
+
+var text = svg.append("g")
+		.selectAll("text")
+    .data(nodes)
+  .enter().append("text")
+  	.text(function (d) { return d.x + ",  " + d.y; ;})
+    .attr("x", function(d) { return xAxisScale(d.x) ; })
+    .attr("y", function(d) { return yAxisScale(d.y) ; })
+    .attr("font-family", "sans-serif")
+   	.attr("font-size", "11px")
+   	.attr("fill", "black");
+
+
+</script>
