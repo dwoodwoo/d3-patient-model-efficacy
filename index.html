@@ -57,9 +57,6 @@ var width = 960,
 			{"x":78,"y":0.05,"r":10}];
 
 
-var div = d3.select("body").append("div")   
-    .attr("class", "tooltip")               
-    .style("opacity", 0);
     
  var xAxisScale = d3.scale.linear()
     .domain([0, 100])
@@ -97,20 +94,7 @@ var circle = svg.append("g")
     .attr("cx", function(d) { return xAxisScale(d.x) ; })
     .attr("cy", function(d) { return yAxisScale(d.y) ; })
     .attr("r", function(d) { return d.r; })
-    .style("fill", "steelblue")
-    .on("mouseover", function(d) {      
-        div.transition()        
-            .duration(200)      
-            .style("opacity", .9);      
-        div .html(d.x + ", "  + d.y)  
-            .style("left", (d3.event.pageX) + "px")     
-            .style("top", (d3.event.pageY - 28) + "px");    
-        })                  
-    .on("mouseout", function(d) {       
-        div.transition()        
-            .duration(500)      
-            .style("opacity", 0);   
-    });
+    .style("fill", "steelblue");
 
 
 var text = svg.append("g")
