@@ -204,8 +204,10 @@ var text2 = svg2.append("g")
 		.attr("class", "text2-group")
 		.selectAll(".text2")
 		.data(["one", "two", "three"])
-	.enter().append("text")
+	.enter()
+		.append("p")
 		.attr("class", "text2")
+		.append("text")
   	.text(function (d) { return d + " "; });
 		
 
