@@ -47,9 +47,18 @@ circle {
     font-size: 11px;
 }
 
+#othergraph {
+	background-color: blue;
+	height: 200px;
+	width: 250px;
+	opacity: 0;
+}
+
 
 </style>
 <body>
+	<div id="othergraph">other graph</div>
+</body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="./bower_components/d3-tip/index.js"></script>
 
@@ -110,7 +119,8 @@ var yAxis = d3.svg.axis()
     .scale(yAxisScale);
 
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("body")
+		.insert("svg", "#othergraph")
     .attr("width", width)
     .attr("height", height);
 
@@ -123,13 +133,25 @@ var yAxisGroup = svg.append("g")
     .call(yAxis);
 
 
+function mouseover(){
+	console.log(tip.show);
+	console.log("MouseOver");
+};
 
+function mouseoff(){
+	console.log("MouseOff");
+};
 
 
 var circle = svg.append("g")
 		.selectAll("circle")
     .data(nodes)
-  .enter().append("circle")
+  .enter()
+  	//add a url link
+  	//as in http://stackoverflow.com/questions/13104681/hyperlinks-in-d3-js-objects
+  	// .append("svg:a")
+  	// .attr("xlink:href", "http://www.cnet.com")
+  .append("circle")
     .attr("cx", function(d) { return xAxisScale(d.x) ; })
     .attr("cy", function(d) { return yAxisScale(d.y) ; })
     .attr("r", function(d) { return d.r; })
@@ -137,9 +159,16 @@ var circle = svg.append("g")
     .on('mouseover', tip.show)
     .on('mouseout', tip.hide)
     .on("click", function(){
-            d3.select(this).transition().attr('r', 25)
-                .style("fill","lightcoral")
-                .style("stroke","red");
+            d3.select(this)
+            		.transition()
+            			.attr('r', 25)
+                	.style("fill","lightcoral")
+                	.style("stroke","red");
+                	console.log("click event");
+            d3.select("#othergraph")
+            		.transition()
+            		.duration(4000)
+            		.style("opacity", 1);	
         })
     .call(tip);
 
