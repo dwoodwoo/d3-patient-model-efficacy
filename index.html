@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+	circle {
+	  stroke: #000;
+	}
 
-circle {
-  stroke: #000;
-}
+	.d3-tip {
+	  line-height: 1;
+	  font-weight: bold;
+	  padding: 12px;
+	  background: rgba(0, 0, 0, 0.8);
+	  color: #fff;
+	  border-radius: 2px;
+	}
 
-.d3-tip {
-  line-height: 1;
-  font-weight: bold;
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  border-radius: 2px;
-}
+	/* Creates a small triangle extender for the tooltip */
+	.d3-tip:after {
+	  box-sizing: border-box;
+	  display: inline;
+	  font-size: 10px;
+	  width: 100%;
+	  line-height: 1;
+	  color: rgba(0, 0, 0, 0.8);
+	  content: "\25BC";
+	  position: absolute;
+	  text-align: center;
+	}
 
-/* Creates a small triangle extender for the tooltip */
-.d3-tip:after {
-  box-sizing: border-box;
-  display: inline;
-  font-size: 10px;
-  width: 100%;
-  line-height: 1;
-  color: rgba(0, 0, 0, 0.8);
-  content: "\25BC";
-  position: absolute;
-  text-align: center;
-}
+	/* Style northward tooltips differently */
+	.d3-tip.n:after {
+	  margin: -1px 0 0 0;
+	  top: 100%;
+	  left: 0;
+	}
 
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-  margin: -1px 0 0 0;
-  top: 100%;
-  left: 0;
-}
+	.axis path,
+	.axis line {
+	    fill: none;
+	    stroke: black;
+	    shape-rendering: crispEdges;
+	}
 
-.axis path,
-.axis line {
-    fill: none;
-    stroke: black;
-    shape-rendering: crispEdges;
-}
+	.axis text {
+	    font-family: sans-serif;
+	    font-size: 11px;
+	}
 
-.axis text {
-    font-family: sans-serif;
-    font-size: 11px;
-}
-
-#othergraph {
-	background-color: blue;
-	height: 200px;
-	width: 250px;
-	opacity: 0;
-}
-
+	#othergraph {
+		background-color: blue;
+		height: 200px;
+		width: 250px;
+		opacity: 0;
+	}
 
 </style>
+
+
 <body>
 	<div id="othergraph">other graph</div>
 </body>
@@ -64,10 +64,16 @@ circle {
 
 
 <script>
-var width = 960,
-    height = 500,
+
+var margin = {top: 20, right: 20, bottom: 20, left: 50};
+
+var width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
     nodes = 
 			[{"x":45,"y":0.86,"r":10},
+			{"x":100,"y":1,"r":10},
+			{"x":100,"y":0,"r":10},
+			{"x":0,"y":0,"r":10},
 			{"x":55,"y":0.58,"r":10},
 			{"x":10,"y":0.99,"r":10},
 			{"x":23,"y":0.45,"r":10},
@@ -115,17 +121,20 @@ var xAxis = d3.svg.axis()
     .scale(xAxisScale);
 
 var yAxis = d3.svg.axis()
-		.orient("right")
+		.orient("left")
     .scale(yAxisScale);
 
 
 var svg = d3.select("body")
 		.insert("svg", "#othergraph")
-    .attr("width", width)
-    .attr("height", height);
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");;
 
 var xAxisGroup = svg.append("g")
 		.attr("class", "axis")
+		.attr("transform", "translate(0," + height + ")")
     .call(xAxis);
 
 var yAxisGroup = svg.append("g")
