@@ -47,9 +47,6 @@
 	}
 
 	#area2 {
-		background-color: grey;
-		height: 200px;
-		width: 250px;
 		opacity: 0;
 	}
 
@@ -62,6 +59,7 @@
 	<div id="area2"></div>
 </body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="./bower_components/d3pie/d3pie/d3pie-patched.js"></script>
 <script src="./bower_components/d3-tip/index.js"></script>
 
 
@@ -72,41 +70,13 @@ var margin = {top: 20, right: 20, bottom: 20, left: 50};
 var width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     nodes = 
-			[{"x":45,"y":0.86,"r":10},
-			{"x":100,"y":1,"r":10},
-			{"x":100,"y":0,"r":10},
-			{"x":0,"y":0,"r":10},
-			{"x":55,"y":0.58,"r":10},
-			{"x":10,"y":0.99,"r":10},
-			{"x":23,"y":0.45,"r":10},
-			{"x":82,"y":0.38,"r":10},
-			{"x":35,"y":0.57,"r":10},
-			{"x":66,"y":0.85,"r":10},
-			{"x":60,"y":0.64,"r":10},
-			{"x":26,"y":0.69,"r":10},
-			{"x":74,"y":0.49,"r":10},
-			{"x":37,"y":0.27,"r":10},
-			{"x":60,"y":0.11,"r":10},
-			{"x":9,"y":1.00,"r":10},
-			{"x":48,"y":0.81,"r":10},
-			{"x":80,"y":0.55,"r":10},
-			{"x":53,"y":0.91,"r":10},
-			{"x":22,"y":0.49,"r":10},
-			{"x":81,"y":0.79,"r":10},
-			{"x":98,"y":0.19,"r":10},
-			{"x":53,"y":0.50,"r":10},
-			{"x":92,"y":0.63,"r":10},
-			{"x":17,"y":0.67,"r":10},
-			{"x":63,"y":0.03,"r":10},
-			{"x":89,"y":0.39,"r":10},
-			{"x":56,"y":0.09,"r":10},
-			{"x":52,"y":0.08,"r":10},
-			{"x":90,"y":0.30,"r":10},
-			{"x":78,"y":0.05,"r":10}];
+			[{"x":6.5,"y":0.6,"r":10, desc: "Patients in Model: 700/10,000<br>Confidence: 0.8<br>Impact: $2.6MM<br>Intervention Success Rate: 25%"},
+			{"x":7,"y":0.65,"r":10, desc: "Patients in Model: 800/10,000<br>Confidence: 0.8<br>Impact: $2.6MM<br>Intervention Success Rate: 50%"},
+			{"x":8,"y":0.7,"r":10, desc: "Patients in Model: 800/10,000<br>Confidence: 0.8<br>Impact: $2.6MM<br>Intervention Success Rate: 75%"}];
 
     
  var xAxisScale = d3.scale.linear()
-    .domain([0, 100])
+    .domain([d3.min(nodes, function(d) { return d.x; })-1, d3.max(nodes, function(d) { return d.x; })+1])
     .range([0, width]);
 
  var yAxisScale = d3.scale.linear()
@@ -115,6 +85,7 @@ var width = 960 - margin.left - margin.right,
 
 
 var xAxis = d3.svg.axis()
+		.tickFormat(function(d) { return d + "%"; })
     .scale(xAxisScale);
 
 var yAxis = d3.svg.axis()
@@ -124,7 +95,8 @@ var yAxis = d3.svg.axis()
 var tip = d3.tip()
 	.attr('class', 'd3-tip')
   .offset([-10, 0])
-	.html(function(d) { return d.x + ", " + d.y ; });
+	// .html(function(d) { return d.x + ", " + d.y ; });
+	.html(function(d) { return d.desc; });
 
 
 var svg1 = d3.select("#area1")
@@ -145,6 +117,35 @@ var xAxisGroup = svg1.append("g")
 var yAxisGroup = svg1.append("g")
 		.attr("class", "axis")
     .call(yAxis);
+
+// y-axis label
+svg1.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "end")
+    .attr("y", 6)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("Reliability (c-index)");
+
+
+// x-axis label
+svg1.append("text")
+    .attr("class", "x label")
+    .attr("text-anchor", "end")
+    .attr("x", xAxisScale(d3.max(nodes, function(d) { return d.x; })))
+    .attr("y", yAxisScale(0.05))
+    .attr("dx", ".75em")
+    .text("total % of patients");
+
+// efficacy area
+svg1.append("rect")
+	.attr('class', 'cutoff')
+	.attr('x', '0')
+	.attr('y', yAxisScale(0.6))
+	.attr('height', height - yAxisScale(0.6))
+	.attr('width', width)
+	.style("fill", "steelblue")
+	.style("opacity", "0.1");
 
 
 var circle = svg1.append("g")
@@ -186,30 +187,110 @@ var circle = svg1.append("g")
     .call(tip);
 
 
-var text1 = svg1.append("g")
-		.attr("class", "text1-group")
-		.selectAll(".text1")
-    .data(nodes)
-  .enter().append("text")
-  	.attr("class", "text1")
-  	.text(function (d) { return d.x + ", " + d.y;})
-    .attr("x", function(d) { return xAxisScale(d.x) ; })
-    .attr("y", function(d) { return yAxisScale(d.y) ; })
-    .attr("font-family", "sans-serif")
-   	.attr("font-size", "11px")
-   	.attr("fill", "black");
+// var text1 = svg1.append("g")
+// 		.attr("class", "text1-group")
+// 		.selectAll(".text1")
+//     .data(nodes)
+//   .enter().append("text")
+//   	.attr("class", "text1")
+//   	// .text(function (d) { return d.x + ", " + d.y;})
+//     .attr("x", function(d) { return xAxisScale(d.x) ; })
+//     .attr("y", function(d) { return yAxisScale(d.y) ; })
+//     .attr("font-family", "sans-serif")
+//    	.attr("font-size", "11px")
+//    	.attr("fill", "black");
 
 
-var text2 = svg2.append("g")
-		.attr("class", "text2-group")
-		.selectAll(".text2")
-		.data(["one", "two", "three"])
-	.enter()
-		.append("p")
-		.attr("class", "text2")
-		.append("text")
-  	.text(function (d) { return d + " "; });
+// var text2 = svg2.append("g")
+// 		.attr("class", "text2-group")
+// 		.selectAll(".text2")
+// 		.data(["one", "two", "three"])
+// 	.enter()
+// 		.append("p")
+// 		.attr("class", "text2")
+// 		.append("text")
+//   	.text(function (d) { return d + " "; });
 		
+var pie = new d3pie("area2", {
+  "header": {
+    "title": {
+      "text": "Patient Characteristics and Risk Factors",
+      "fontSize": 24,
+      "font": "open sans"
+    },
+    "subtitle": {
+      "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
+      "color": "#999999",
+      "fontSize": 12,
+      "font": "open sans"
+    },
+    "titleSubtitlePadding": 9
+  },
+  "footer": {
+    "color": "#999999",
+    "fontSize": 10,
+    "font": "open sans",
+    "location": "bottom-left"
+  },
+  "size": {
+    "canvasWidth": 960,
+    "pieInnerRadius": "20%",
+  },
+  "data": {
+    "sortOrder": "",
+    "content": [
+      {"label":"One or more admissions in past year", "value": 8, "sign":"+", "color": "#5a84fa"},
+{"label":"Married males", "value": 2, "sign": "+", "color": "#678dfb"},
+{"label":"Medicare or Medi-Cal", "value": 2, "sign": "+", "color": "#7597fb"},
+{"label":"Urgent admission", "value": 2, "sign": "+", "color": "#81a0fa"},
+{"label":"Self-admit to ED", "value": 1, "sign": "+", "color": "#90abfb"},
+{"label":"15 or more diagnoses", "value": 3, "sign": "+", "color": "#3b0300"},
+{"label":"Any infectious disease", "value": 2, "sign": "+", "color": "#470500"},
+{"label":"Any digestive disorder", "value": 1, "sign": "+", "color": "#510600"},
+{"label":"Primary Dx of COPD", "value": 1, "sign": "+", "color": "#5c0702"},
+{"label":"Musculoskeletal disorder", "value": 2, "sign": "-", "color": "#670901"},
+{"label":"Current LOS 7 days or more", "value": 1, "sign": "+", "color": "#022c00"},
+{"label":"Discharge to Hospice", "value": 2, "sign": "-", "color": "#043500"}
+    ]
+  },
+  "labels": {
+    "outer": {
+      "pieDistance": 32
+    },
+    "inner": {
+      "format": "value"
+    },
+    "mainLabel": {
+      "fontSize": 11
+    },
+    "percentage": {
+      "color": "#ffffff",
+      "decimalPlaces": 0
+    },
+    "value": {
+      "color": "#adadad",
+      "fontSize": 11
+    },
+    "lines": {
+      "enabled": true
+    }
+  },
+  "effects": {
+    "pullOutSegmentOnClick": {
+      "effect": "linear",
+      "speed": 400,
+      "size": 8
+    }
+  },
+  "misc": {
+    "gradient": {
+      "enabled": true,
+      "percentage": 100
+    }
+  }
+});
+
+
 
 
 
