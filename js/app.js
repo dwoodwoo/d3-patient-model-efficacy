@@ -80,6 +80,17 @@ svg1.append("rect")
   .style("fill", "steelblue")
   .style("opacity", "0.1");
 
+svg1.append("text")
+    .attr('x', xAxisScale(d3.min(nodes, function(d) { return d.x; }) - 1))
+    .attr('y', yAxisScale(0.66))
+    .text("acceptable");
+
+svg1.append("text")
+    .attr('x', xAxisScale(d3.min(nodes, function(d) { return d.x; }) - 1))
+    .attr('y', yAxisScale(0.62))
+    .text("unacceptable");
+
+
 
 var circle = svg1.append("g")
     .attr("class", "circles-group")
