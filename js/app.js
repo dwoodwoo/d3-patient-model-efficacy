@@ -74,8 +74,8 @@ svg1.append("text")
 svg1.append("rect")
   .attr('class', 'cutoff')
   .attr('x', '0')
-  .attr('y', yAxisScale(0.6))
-  .attr('height', height - yAxisScale(0.6))
+  .attr('y', yAxisScale(0.65))
+  .attr('height', height - yAxisScale(0.65))
   .attr('width', width)
   .style("fill", "steelblue")
   .style("opacity", "0.1");
@@ -120,11 +120,11 @@ var circle = svg1.append("g")
                   d3.select("#area2").append('div')
                     .attr('class', 'btn btn-primary')
                     .style("text-align", "center")
-                    .html('Predictive Change in Outcome');
+                    .html('Predict Change in Outcome');
                   d3.select("#area2").append('div')
                     .attr('class', 'btn btn-primary')
                     .style("text-align", "center")
-                    .html('Potential Cost Savings');
+                    .html('Calculate Potential Cost Savings');
                   
             // d3.select("#area2")
             //     .transition()
