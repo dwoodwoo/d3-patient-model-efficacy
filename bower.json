@@ -24,7 +24,8 @@
   "dependencies": {
     "d3": "^3.5",
     "d3-tip": "~0.6.6",
-    "d3pie": "https://github.com/dwoodwoo/d3pie.git#0.1.6-patched"
+    "d3pie": "https://github.com/dwoodwoo/d3pie.git#0.1.6-patched",
+    "bootstrap": "~3.3.2"
   },
   "resolutions": {
     "d3": "^3.5"
