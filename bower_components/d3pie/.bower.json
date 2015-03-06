@@ -1,6 +1,6 @@
 {
   "name": "d3pie",
-  "version": "0.1.6",
+  "version": "0.1.6-patched",
   "homepage": "http://d3pie.org",
   "authors": [
     "Ben Keen <ben.keen@gmail.com>"
@@ -31,14 +31,13 @@
     "jquery": "^2.0",
     "d3": "^3.4"
   },
-  "_release": "0.1.6",
+  "_release": "0.1.6-patched",
   "_resolution": {
     "type": "version",
-    "tag": "0.1.6",
-    "commit": "94197d541301a8acdabb17feb650b0de0565589e"
+    "tag": "0.1.6-patched",
+    "commit": "d4c85f69514ce2858f1f8227bd6440d5b7a56666"
   },
-  "_source": "git://github.com/benkeen/d3pie.git",
-  "_target": "~0.1.6",
-  "_originalSource": "d3pie",
-  "_direct": true
+  "_source": "https://github.com/dwoodwoo/d3pie.git",
+  "_target": "0.1.6-patched",
+  "_originalSource": "https://github.com/dwoodwoo/d3pie.git"
 }

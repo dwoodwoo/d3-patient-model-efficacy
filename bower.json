@@ -1,0 +1,32 @@
+{
+  "name": "d3-patient-model-efficacy",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dwoodwoo/d3-patient-model-efficacy",
+  "authors": [
+    "Dennis Woo <dwoo@sent.com>"
+  ],
+  "description": "prototype for dr. jeremy bornstein",
+  "main": "index.html",
+  "keywords": [
+    "d3",
+    "bootstrap",
+    "dataviz"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "^3.5",
+    "d3-tip": "~0.6.6",
+    "d3pie": "https://github.com/dwoodwoo/d3pie.git#0.1.6-patched"
+  },
+  "resolutions": {
+    "d3": "^3.5"
+  }
+}
