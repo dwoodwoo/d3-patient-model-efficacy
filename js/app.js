@@ -112,7 +112,10 @@ var circle = svg1.append("g")
                   .attr('r', 10)
                   .style("fill", "steelblue");
                   console.log("click event");
-                  pie();
+                  if( $('#area2').is(':empty') ) {
+                    pie();
+                  };
+                  
             // d3.select("#area2")
             //     .transition()
             //     .duration(2000)
@@ -120,13 +123,8 @@ var circle = svg1.append("g")
         })
     .call(tip);
 
-    
 
-var pie = 
-function () {
-
-
-new d3pie("area2", {
+var piejson1 = {
   "header": {
     "title": {
       "text": "30 Day Readmissions",
@@ -203,8 +201,11 @@ new d3pie("area2", {
       "percentage": 100
     }
   }
-});
-
-
 };
+
+
+var pie = 
+  function () {
+    new d3pie("area2", piejson1);
+  };
 
