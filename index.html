@@ -147,9 +147,8 @@ svg1.append("text")
 svg1.append("text")
     .attr("class", "x label")
     .attr("text-anchor", "end")
-    .attr("x", xAxisScale(d3.max(nodes, function(d) { return d.x; })))
-    .attr("y", yAxisScale(0.05))
-    .attr("dx", ".75em")
+    .attr("x", xAxisScale(d3.max(nodes, function(d) { return d.x; }) + 1))
+    .attr("y", yAxisScale(0.01))
     .text("total % of patients");
 
 // efficacy area
