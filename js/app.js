@@ -149,20 +149,20 @@ var pie = new d3pie("area2", {
     "title": {
       "text": "30 Day Readmissions",
       "fontSize": 24,
-      "font": "open sans"
+      "font": "sans-serif"
     },
     "subtitle": {
       "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
       "color": "#999999",
       "fontSize": 12,
-      "font": "open sans"
+      "font": "sans-serif"
     },
     "titleSubtitlePadding": 9
   },
   "footer": {
     "color": "#999999",
     "fontSize": 10,
-    "font": "open sans",
+    "font": "sans-serif",
     "location": "bottom-left"
   },
   "size": {
