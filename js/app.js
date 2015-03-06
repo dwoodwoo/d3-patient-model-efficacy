@@ -14,7 +14,7 @@ var width = 960 - margin.left - margin.right,
     .range([0, width]);
 
  var yAxisScale = d3.scale.linear()
-    .domain([0, 1])
+    .domain([0.5, 1])
     .range([height, 0]);
 
 
@@ -125,7 +125,7 @@ var circle = svg1.append("g")
                   console.log("click event d", d, "i", i);
                   //manually empty #area2...pie.redraw() doesn't do it right
                   d3.select("#area2").html("");
-                  document.getElementById("area2").innerHTML = "";
+                  d3.select("#area2").html("<h3>30 Day Readmissions</h3><span style='position:relative;top : 0.7em;'><font size=24 color=#5a84fa>&#9679;</font></span>Patient Characteristics <span style='position:relative;top : 0.7em;'><font size=24 color=#470500>&#9679;</font></span>Illness Risk Factors <span style='position:relative;top : 0.7em;'><font size=24 color=#022c00>&#9679;</font></span>Hospital Course Risk Factors");
                   var pie = new d3pie("area2", piejsonarr[i]);
                   d3.select("#area2").append('br')
                   d3.select("#area2").append('div')
@@ -147,20 +147,20 @@ var circle = svg1.append("g")
 
 var piejsonarr = [];
 var piejson1 = {
-  "header": {
-    "title": {
-      "text": "30 Day Readmissions",
-      "fontSize": 24,
-      "font": "sans-serif"
-    },
-    "subtitle": {
-      "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
-      "color": "#999999",
-      "fontSize": 12,
-      "font": "sans-serif"
-    },
-    "titleSubtitlePadding": 9
-  },
+  // "header": {
+  //   "title": {
+  //     "text": "30 Day Readmissions",
+  //     "fontSize": 24,
+  //     "font": "sans-serif"
+  //   },
+  //   "subtitle": {
+  //     "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
+  //     "color": "#999999",
+  //     "fontSize": 12,
+  //     "font": "sans-serif"
+  //   },
+  //   "titleSubtitlePadding": 9
+  // },
   "footer": {
     "color": "#999999",
     "fontSize": 10,
@@ -227,20 +227,20 @@ var piejson1 = {
 
 
 var piejson2 = {
-  "header": {
-    "title": {
-      "text": "30 Day Readmissions",
-      "fontSize": 24,
-      "font": "sans-serif"
-    },
-    "subtitle": {
-      "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
-      "color": "#999999",
-      "fontSize": 12,
-      "font": "sans-serif"
-    },
-    "titleSubtitlePadding": 9
-  },
+  // "header": {
+  //   "title": {
+  //     "text": "30 Day Readmissions",
+  //     "fontSize": 24,
+  //     "font": "sans-serif"
+  //   },
+  //   "subtitle": {
+  //     "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
+  //     "color": "#999999",
+  //     "fontSize": 12,
+  //     "font": "sans-serif"
+  //   },
+  //   "titleSubtitlePadding": 9
+  // },
   "footer": {
     "color": "#999999",
     "fontSize": 10,
@@ -306,20 +306,20 @@ var piejson2 = {
 };
 
 var piejson3 = {
-  "header": {
-    "title": {
-      "text": "30 Day Readmissions",
-      "fontSize": 24,
-      "font": "sans-serif"
-    },
-    "subtitle": {
-      "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
-      "color": "#999999",
-      "fontSize": 12,
-      "font": "sans-serif"
-    },
-    "titleSubtitlePadding": 9
-  },
+  // "header": {
+  //   "title": {
+  //     "text": "30 Day Readmissions",
+  //     "fontSize": 24,
+  //     "font": "sans-serif"
+  //   },
+  //   "subtitle": {
+  //     "text": "Patient Characteristics, Illness Risk Factors, Hospital Course Risk Factors",
+  //     "color": "#999999",
+  //     "fontSize": 12,
+  //     "font": "sans-serif"
+  //   },
+  //   "titleSubtitlePadding": 9
+  // },
   "footer": {
     "color": "#999999",
     "fontSize": 10,
