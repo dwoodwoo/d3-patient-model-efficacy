@@ -52,8 +52,12 @@ circle {
     font-size: 11px;
 }
 
+#area1 {
+  width: 960px;
+}
+
 #area2 {
-	opacity: 1;
+  width: 960px;
 }
 
 header {

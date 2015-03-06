@@ -113,8 +113,18 @@ var circle = svg1.append("g")
                   .style("fill", "steelblue");
                   console.log("click event d", d, "i", i);
                   //manually empty #area2...pie.redraw() doesn't do it right
+                  d3.select("#area2").html("");
                   document.getElementById("area2").innerHTML = "";
                   var pie = new d3pie("area2", piejsonarr[i]);
+                  d3.select("#area2").append('br')
+                  d3.select("#area2").append('div')
+                    .attr('class', 'btn btn-primary')
+                    .style("text-align", "center")
+                    .html('Predictive Change in Outcome');
+                  d3.select("#area2").append('div')
+                    .attr('class', 'btn btn-primary')
+                    .style("text-align", "center")
+                    .html('Potential Cost Savings');
                   
             // d3.select("#area2")
             //     .transition()
@@ -370,10 +380,5 @@ piejsonarr.push(piejson2);
 piejsonarr.push(piejson3);
 
 
-
-var pie = 
-  function (piejson) {
-    new d3pie("area2", piejson);
-  };
 
 
