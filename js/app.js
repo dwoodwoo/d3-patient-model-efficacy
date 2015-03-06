@@ -112,39 +112,21 @@ var circle = svg1.append("g")
                   .attr('r', 10)
                   .style("fill", "steelblue");
                   console.log("click event");
-            d3.select("#area2")
-                .transition()
-                .duration(2000)
-                .style("opacity", 1); 
+                  pie();
+            // d3.select("#area2")
+            //     .transition()
+            //     .duration(2000)
+            //     .style("opacity", 1); 
         })
     .call(tip);
 
-
-// var text1 = svg1.append("g")
-//    .attr("class", "text1-group")
-//    .selectAll(".text1")
-//     .data(nodes)
-//   .enter().append("text")
-//    .attr("class", "text1")
-//    // .text(function (d) { return d.x + ", " + d.y;})
-//     .attr("x", function(d) { return xAxisScale(d.x) ; })
-//     .attr("y", function(d) { return yAxisScale(d.y) ; })
-//     .attr("font-family", "sans-serif")
-//      .attr("font-size", "11px")
-//      .attr("fill", "black");
-
-
-// var text2 = svg2.append("g")
-//    .attr("class", "text2-group")
-//    .selectAll(".text2")
-//    .data(["one", "two", "three"])
-//  .enter()
-//    .append("p")
-//    .attr("class", "text2")
-//    .append("text")
-//    .text(function (d) { return d + " "; });
     
-var pie = new d3pie("area2", {
+
+var pie = 
+function () {
+
+
+new d3pie("area2", {
   "header": {
     "title": {
       "text": "30 Day Readmissions",
@@ -173,17 +155,17 @@ var pie = new d3pie("area2", {
     "sortOrder": "",
     "content": [
       {"label":"One or more admissions in past year", "value": 8, "sign":"+", "color": "#5a84fa"},
-{"label":"Married males", "value": 2, "sign": "+", "color": "#678dfb"},
-{"label":"Medicare or Medi-Cal", "value": 2, "sign": "+", "color": "#7597fb"},
-{"label":"Urgent admission", "value": 2, "sign": "+", "color": "#81a0fa"},
-{"label":"Self-admit to ED", "value": 1, "sign": "+", "color": "#90abfb"},
-{"label":"15 or more diagnoses", "value": 3, "sign": "+", "color": "#3b0300"},
-{"label":"Any infectious disease", "value": 2, "sign": "+", "color": "#470500"},
-{"label":"Any digestive disorder", "value": 1, "sign": "+", "color": "#510600"},
-{"label":"Primary Dx of COPD", "value": 1, "sign": "+", "color": "#5c0702"},
-{"label":"Musculoskeletal disorder", "value": 2, "sign": "-", "color": "#670901"},
-{"label":"Current LOS 7 days or more", "value": 1, "sign": "+", "color": "#022c00"},
-{"label":"Discharge to Hospice", "value": 2, "sign": "-", "color": "#043500"}
+      {"label":"Married males", "value": 2, "sign": "+", "color": "#678dfb"},
+      {"label":"Medicare or Medi-Cal", "value": 2, "sign": "+", "color": "#7597fb"},
+      {"label":"Urgent admission", "value": 2, "sign": "+", "color": "#81a0fa"},
+      {"label":"Self-admit to ED", "value": 1, "sign": "+", "color": "#90abfb"},
+      {"label":"15 or more diagnoses", "value": 3, "sign": "+", "color": "#3b0300"},
+      {"label":"Any infectious disease", "value": 2, "sign": "+", "color": "#470500"},
+      {"label":"Any digestive disorder", "value": 1, "sign": "+", "color": "#510600"},
+      {"label":"Primary Dx of COPD", "value": 1, "sign": "+", "color": "#5c0702"},
+      {"label":"Musculoskeletal disorder", "value": 2, "sign": "-", "color": "#670901"},
+      {"label":"Current LOS 7 days or more", "value": 1, "sign": "+", "color": "#022c00"},
+      {"label":"Discharge to Hospice", "value": 2, "sign": "-", "color": "#043500"}
     ]
   },
   "labels": {
@@ -222,3 +204,7 @@ var pie = new d3pie("area2", {
     }
   }
 });
+
+
+};
+
