@@ -113,7 +113,7 @@ var circle = svg1.append("g")
                   .style("fill", "steelblue");
                   console.log("click event");
                   if( $('#area2').is(':empty') ) {
-                    pie();
+                    pie(piejson1);
                   };
                   
             // d3.select("#area2")
@@ -205,7 +205,7 @@ var piejson1 = {
 
 
 var pie = 
-  function () {
-    new d3pie("area2", piejson1);
+  function (piejson) {
+    new d3pie("area2", piejson);
   };
 
