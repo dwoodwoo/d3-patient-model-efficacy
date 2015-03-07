@@ -3,9 +3,9 @@ var margin = {top: 20, right: 20, bottom: 20, left: 50};
 var width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     nodes = 
-      [{"x":6.5,"y":0.6,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 650/10,000<br>percent of total patients(%): 0.65<br>c-index: 0.60", "title":"30 Day Readmissions"},
-      {"x":7,"y":0.70,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 700/10,000<br>percent of total patients(%): 0.70<br>c-index: 0.70", "title":"30 Day Readmissions"},
-      {"x":8,"y":0.80,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 800/10,000<br>percent of total patients(%): 0.80<br>c-index: 0.80", "title":"30 Day Readmissions"},
+      [{"x":6.5,"y":0.6,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 650/10,000<br>percent of total patients(%): 0.65<br>c-index: 0.60", "title":"Hospital Readmissions"},
+      {"x":7,"y":0.70,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 700/10,000<br>percent of total patients(%): 0.70<br>c-index: 0.70", "title":"Hospital Readmissions"},
+      {"x":8,"y":0.80,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 800/10,000<br>percent of total patients(%): 0.80<br>c-index: 0.80", "title":"Hospital Readmissions"},
       {"x":10,"y":0.85,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 500/5,000<br>percent of total patients(%): 0.10<br>c-index: 0.85", "title":"ER Visits"},
       {"x":5,"y":0.55,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 250/5,000<br>percent of total patients(%): 0.10<br>c-index: 0.55", "title":"ER Visits"},
       {"x":16,"y":0.70,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 800/5,000<br>percent of total patients(%): 0.16<br>c-index: 0.70", "title":"ER Visits"},
@@ -140,15 +140,13 @@ var circle = svg1.append("g")
                   )
                   console.assert(~~(i/3) <=2 && ~~(i/3-1) >=0, "out of range");
                   var pie = new d3pie("area2", piejsonarr[~~(i/3)]);
-                  d3.select("#area2").append('br')
-                  d3.select("#area2").append('div')
-                    .attr('class', 'btn btn-primary')
-                    .style("text-align", "center")
-                    .html('Predict Change in Outcome');
-                  d3.select("#area2").append('div')
-                    .attr('class', 'btn btn-primary')
-                    .style("text-align", "center")
-                    .html('Calculate Potential Cost Savings');
+                  d3.select("#area2")
+                    .append("span")
+                    .html("<br>"
+                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Predict Change in Outcome</button>"
+                          + "&nbsp;"
+                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Calculate Potential Cost Savings</button>");
+
                   
             // d3.select("#area2")
             //     .transition()
