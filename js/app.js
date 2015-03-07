@@ -5,7 +5,13 @@ var width = 960 - margin.left - margin.right,
     nodes = 
       [{"x":6.5,"y":0.6,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 650/10,000<br>percent of total patients(%): 0.65<br>c-index: 0.60"},
       {"x":7,"y":0.70,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 700/10,000<br>percent of total patients(%): 0.70<br>c-index: 0.70"},
-      {"x":8,"y":0.80,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 800/10,000<br>percent of total patients(%): 0.80<br>c-index: 0.80"}
+      {"x":8,"y":0.80,"r":10, "desc": "Outcome Variable (Hospital Readmissions)<br># of Patients (n): 800/10,000<br>percent of total patients(%): 0.80<br>c-index: 0.80"},
+      {"x":10,"y":0.85,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 500/5,000<br>percent of total patients(%): 0.10<br>c-index: 0.85"},
+      {"x":5,"y":0.55,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 250/5,000<br>percent of total patients(%): 0.10<br>c-index: 0.55"},
+      {"x":16,"y":0.70,"r":10, "desc": "Outcome Variable (ER Visits)<br># of Patients (n): 800/5,000<br>percent of total patients(%): 0.16<br>c-index: 0.70"},
+      {"x":8,"y":0.65,"r":10, "desc": "Outcome Variable (Clinic Visits)<br># of Patients (n): 4,000/50,000<br>percent of total patients(%): 0.08<br>c-index: 0.65"},
+      {"x":6,"y":0.55,"r":10, "desc": "Outcome Variable (Clinic Visits)<br># of Patients (n): 3,000/50,000<br>percent of total patients(%): 0.06<br>c-index: 0.75"},
+      {"x":15,"y":0.60,"r":10, "desc": "Outcome Variable (Clinic Visits)<br># of Patients (n): 7,500/50,000<br>percent of total patients(%): 0.15<br>c-index: 0.60"}
    ];
 
     
@@ -126,7 +132,8 @@ var circle = svg1.append("g")
                   //manually empty #area2...pie.redraw() doesn't do it right
                   d3.select("#area2").html("");
                   d3.select("#area2").html("<h3>30 Day Readmissions</h3><span style='position:relative;top : 0.7em;'><font size=24 color=#5a84fa>&#9679;</font></span>Patient Characteristics <span style='position:relative;top : 0.7em;'><font size=24 color=#470500>&#9679;</font></span>Illness Risk Factors <span style='position:relative;top : 0.7em;'><font size=24 color=#022c00>&#9679;</font></span>Hospital Course Risk Factors");
-                  var pie = new d3pie("area2", piejsonarr[i]);
+                  console.assert(~~(i/3) <=2 && ~~(i-1) >=0, "out of range");
+                  var pie = new d3pie("area2", piejsonarr[~~(i/3)]);
                   d3.select("#area2").append('br')
                   d3.select("#area2").append('div')
                     .attr('class', 'btn btn-primary')
@@ -383,6 +390,9 @@ var piejson3 = {
     }
   }
 };
+
+
+
 
 
 
