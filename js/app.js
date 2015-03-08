@@ -143,7 +143,7 @@ var circle = svg1.append("g")
                   d3.select("#area2")
                     .append("span")
                     .html("<br>"
-                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Predict Change in Outcome</button>"
+                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal1'>Predict Change in Outcome</button>"
                           + "&nbsp;"
                           + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal2'>Calculate Potential Cost Savings</button>"
                           + "<br /><br />"
