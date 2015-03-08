@@ -145,8 +145,11 @@ var circle = svg1.append("g")
                     .html("<br>"
                           + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Predict Change in Outcome</button>"
                           + "&nbsp;"
-                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'>Calculate Potential Cost Savings</button>");
-
+                          + "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal2'>Calculate Potential Cost Savings</button>"
+                          + "<br /><br />"
+                          + "<button type='button' class='btn btn-primary'>Display Projected Model</button>"
+                          + "&nbsp;"
+                          + "<button type='button' class='btn btn-primary'>Export Model to EHR</button>");
                   
             // d3.select("#area2")
             //     .transition()

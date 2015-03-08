@@ -67,3 +67,7 @@ header {
 header h2 {
   text-align: center;
 }
+
+.modal-border {
+  border:1px solid black;
+}
